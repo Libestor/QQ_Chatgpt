@@ -1,0 +1,60 @@
+version: '3'
+
+networks:
+  gpt:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.100.0/24
+services:
+  nonebot:
+    build:
+      context: ./nonebot
+      dockerfile: ./Dockerfile
+    networks: 
+      - gpt
+    depends_on:
+      - go-cqhttp
+      - v2ray
+      - qsign
+    volumes:
+      - ./nonebot/:/root/nonebot
+    command: ["/bin/sh","-c","/root/nonebot/start.sh"]
+    networks:
+      gpt:
+        ipv4_address: 192.168.100.2
+  go-cqhttp:
+    build:
+      context: ./go_cqhttp/
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./go_cqhttp/:/root/go_cqhttp
+    command: ["/bin/sh","-c","/root/go_cqhttp/start.sh"]
+    depends_on:
+      - qsign
+    networks:
+      gpt:
+        ipv4_address: 192.168.100.3
+  v2ray:
+    build:
+      context: ./v2ray
+      dockerfile: ./Dockerfile
+    networks: 
+      - gpt
+    volumes:
+      - ./v2ray/:/root/v2ray
+    command: ["/bin/sh","-c","/root/v2ray/start.sh"]
+    networks:
+      gpt:
+        ipv4_address: 192.168.100.4
+  qsign:
+      image: xzhouqd/qsign:8.9.63
+      networks: 
+        - gpt
+      restart: always
+      environment:
+        ANDROID_ID: "425d8e70b1953df3"
+      networks:
+        gpt:
+          ipv4_address: 192.168.100.5
+  

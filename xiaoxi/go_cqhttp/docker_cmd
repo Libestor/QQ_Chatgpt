@@ -1,0 +1,1 @@
+docker run  --restart=always --name qsign -p 28080:8080 -d -e  ANDROID_ID= xzhouqd/qsign:8.9.63

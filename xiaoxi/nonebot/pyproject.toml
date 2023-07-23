@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "xiaoxi"
+version = "0.1.0"
+description = "xiaoxi"
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+nonebot2 = "^2.0.0-beta.1"
+nonebot-plugin-chatgpt-turbo = "^0.3.0"
+
+[tool.poetry.dev-dependencies]
+nb-cli = "^0.6.0"
+
+[tool.nonebot]
+plugin_dirs = ["src/plugins"]
+plugins = ["nonebot_plugin_chatgpt_turbo"]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

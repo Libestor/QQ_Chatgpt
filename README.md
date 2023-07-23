@@ -14,4 +14,4 @@ QQ机器人联合Chatgpt的一套解决方案
 sudo docker-compose up -d
 ```
 
-更多信息可以通过我的博客查看
+更多信息可以通过[我的博客](https://libestor.top/qq机器人联合chatgpt的一套解决方案/)查看
